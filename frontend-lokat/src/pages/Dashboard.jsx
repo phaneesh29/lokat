@@ -36,7 +36,6 @@ const Dashboard = () => {
       setViewers(result.data.accesses)
     } catch (error) {
       setViewers([])
-      toast.error(error?.response?.data?.message || error?.message)
     } finally {
       setLoading(false)
     }
@@ -49,7 +48,6 @@ const Dashboard = () => {
       setOthers(result.data.accesses)
     } catch (error) {
       setOthers([])
-      toast.error(error?.response?.data?.message || error?.message)
     } finally {
       setLoading(false)
     }
@@ -65,7 +63,6 @@ const Dashboard = () => {
     try {
       setBtnLoading(true)
       const result = await axios.post("/auth/grant-access", { receiverEmail })
-      toast.success(result.data.message)
       whoCanSeeMe()
 
     } catch (error) {
@@ -80,7 +77,6 @@ const Dashboard = () => {
     try {
       setDeleteBtnLoading(true)
       const result = await axios.post("/auth/delete-access", { accessId })
-      toast.success(result.data.message)
       whoCanSeeMe()
     } catch (error) {
       toast.error(error?.response?.data?.message || error?.message)
