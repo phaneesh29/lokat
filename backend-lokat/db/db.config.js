@@ -1,27 +1,29 @@
 import mongoose from "mongoose";
 import { MONGODB_URI, DB_NAME } from "../constants.js";
 
-let cached = global.mongoose;
-
-if (!cached) {
-    cached = global.mongoose = { conn: null, promise: null };
+let globalWithMongoose = globalThis;
+if (!globalWithMongoose._mongooseCache) {
+    globalWithMongoose._mongooseCache = { conn: null, promise: null };
 }
 
 export default async function connectDB() {
-    if (cached.conn) return cached.conn;
+    if (globalWithMongoose._mongooseCache.conn) {
+        return globalWithMongoose._mongooseCache.conn;
+    }
 
-    if (!cached.promise) {
-        cached.promise = mongoose.connect(`${MONGODB_URI}/${DB_NAME}`, {
+    if (!globalWithMongoose._mongooseCache.promise) {
+        globalWithMongoose._mongooseCache.promise = mongoose.connect(`${MONGODB_URI}/${DB_NAME}`, {
             bufferCommands: false,
+            maxPoolSize: 5, // Optional tweak: control pool size for serverless
         });
     }
 
     try {
-        cached.conn = await cached.promise;
-        console.log(`MongoDB connected !! DB HOST: ${cached.conn.connection.host}`);
-        return cached.conn;
+        globalWithMongoose._mongooseCache.conn = await globalWithMongoose._mongooseCache.promise;
+        console.log(`✅ MongoDB connected: ${globalWithMongoose._mongooseCache.conn.connection.host}`);
+        return globalWithMongoose._mongooseCache.conn;
     } catch (error) {
-        console.log("MONGODB connection FAILED ", error);
-        process.exit(1)
+        console.error("❌ MongoDB connection failed:", error);
+        throw error;
     }
 }
