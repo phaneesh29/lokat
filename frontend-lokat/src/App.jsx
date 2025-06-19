@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, Routes } from "react-router-dom"
 import LandingPage from './pages/LandingPage'
 import RegisterPage from './pages/RegisterPage'
@@ -9,7 +8,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import VerifyOTP from './pages/VerifyOTP'
 import LogoutPage from './pages/LogoutPage'
 import Dashboard from './pages/Dashboard'
-import TrackPage from './pages/TrackPage'
 import axios from './lib/axios'
 import { useEffect } from 'react'
 
