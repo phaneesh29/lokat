@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import axios from '../lib/axios'
+import LoadingButton from '../components/LoadingButton'
 
 const VerifyOTP = () => {
     const navigate = useNavigate()
@@ -71,7 +72,7 @@ const VerifyOTP = () => {
                         <button type='button' disabled={resendBtn} onClick={handleResend} className={`${resendBtn ? "cursor-not-allowed" : "cursor-pointer"}`}>resend OTP</button>
                     </div>
                     <div className='flex justify-center items-center'>
-                        <button type="submit" disabled={loading} className={`${loading ? "cursor-not-allowed" : "cursor-pointer"} p-3 border-2 rounded-full font-bold hover:bg-[#ffaeae] w-40 transition-all duration-200`}>Verify</button>
+                        <button type="submit" disabled={loading} className={`${loading ? "cursor-not-allowed" : "cursor-pointer"} p-3 border-2 rounded-full font-bold hover:bg-[#ffaeae] w-40 transition-all duration-200`}>{loading ? <LoadingButton /> : "Verify"}</button>
                     </div>
                 </form>
             </div>

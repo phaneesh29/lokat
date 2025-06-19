@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import axios from '../lib/axios'
 import BottomNav from '../components/BottomNav'
+import LoadingButton from '../components/LoadingButton'
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -60,7 +61,7 @@ const LoginPage = () => {
           </div>
 
           <div className='flex justify-center items-center'>
-            <button type="submit" disabled={loading} className={`${loading ? "cursor-not-allowed" : "cursor-pointer"} p-3 border-2 rounded-full font-bold hover:bg-[#ffaeae] w-40 transition-all duration-200`}>Login</button>
+            <button type="submit" disabled={loading} className={`${loading ? "cursor-not-allowed" : "cursor-pointer"} p-3 border-2 rounded-full font-bold hover:bg-[#ffaeae] w-40 transition-all duration-200`}>{loading ? <LoadingButton /> : "Login"}</button>
           </div>
 
         </form>

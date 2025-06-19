@@ -58,7 +58,6 @@ const App = () => {
 
         <Route path={"/dashboard"} element={<Dashboard />} />
         <Route path={"/profile"} element={<ProfilePage />} />
-        <Route path={"/track"} element={<TrackPage />} />
 
         <Route path={"/verify"} element={<VerifyOTP />} />
         <Route path={"/logout"} element={<LogoutPage />} />
